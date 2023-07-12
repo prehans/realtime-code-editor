@@ -11,12 +11,12 @@ const io=new Server(server);
 //      res.sendFile(path.join(__dirname , 'build' , 'index.html'));
 // });
 //new
-const buildPath = path.join(__dirname, 'build');
-app.use(express.static(buildPath));
+// const buildPath = path.join(__dirname, 'build');
+// app.use(express.static(buildPath));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(buildPath, 'index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(buildPath, 'index.html'));
+// });
 //added
 const userSocketMap={};
 function getAllConnectedClients(roomId){
