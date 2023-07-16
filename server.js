@@ -11,11 +11,18 @@ const io=new Server(server);
 //      res.sendFile(path.join(__dirname , 'build' , 'index.html'));
 // });
 
-app.use(express.static(path.join(__dirname, 'build')));
+// app.use(express.static(path.join(__dirname, 'build')));
 
-app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+// app.get('/', function (req, res) {
+//   res.sendFile(path.join(__dirname, 'build', 'index.html'));
+// });
+if (process.env.NODE_ENV) {
+  //static folder add
+app.use(express.static('project/src/build'));
+app.get("*", function (req, res) {
+  res.sendFile(path.resolve(__dirname , "project/src/build", "index.html"));
 });
+}
 //new
 // const buildPath = path.join(__dirname, 'build');
 // app.use(express.static(buildPath));
