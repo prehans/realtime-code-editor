@@ -6,38 +6,11 @@ const {Server} =require('socket.io');
 const ACTIONS = require('./src/Actions');
 const server =http.createServer(app);
 const io=new Server(server);
-// app.use(express.static('build'));
-// app.use((req, res , next)=>{
-//      res.sendFile(path.join(__dirname , 'build' , 'index.html'));
-// });
+app.use(express.static('build'));
+app.use((req,res,next)=>{
 
-// app.use(express.static(path.join(__dirname, 'build')));
-
-// app.get('/', function (req, res) {
-//   res.sendFile(path.join(__dirname, 'build', 'index.html'));
-// });
-// if (process.env.NODE_ENV) {
-//   //static folder add
-// app.use(express.static('build'));
-// app.get("*", function (req, res) {
-//   res.sendFile(path.resolve(__dirname , "build", "index.html"));
-// });
-// }
-//new
-// const buildPath = path.join(__dirname, 'build');
-// app.use(express.static(buildPath));
-
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(buildPath, 'index.html'));
-// });
-//added
-
-app.use(express.static(path.join(__dirname, 'build')));
-
-// Handle all incoming requests, and send the 'index.html' file for client-side routing
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
+    res.sendFile(path.join(__dirname,'build','index.html'));
+})
 const userSocketMap={};
 function getAllConnectedClients(roomId){
     return Array.from(io.sockets.adapter.rooms.get(roomId)|| []).map((socketId)=>{
