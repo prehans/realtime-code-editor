@@ -3,15 +3,24 @@ import React, { useState } from 'react';
 import {v4 as uuidV4} from 'uuid';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-
+import PreLoader from "../components/PreLoader";
+import { useEffect } from "react";
 
 const Home = () => {
   const navigate = useNavigate();
-
+  const [Loading, setLoading] = useState(true);
   const [roomId , setRoomId] =useState('');
   const [username , setUsername] =useState('');
-  const createNewRoom=(e)=>{
+  useEffect(() => {
+      
+    setTimeout(()=>{
+
+          setLoading(false);
+    },3000)
     
+}, []);
+  
+  const createNewRoom=(e)=>{ 
     e.preventDefault();
     const id =uuidV4();
     setRoomId(id);
@@ -39,6 +48,10 @@ const Home = () => {
     }
 
   }
+  if(Loading){
+  return <PreLoader/>
+  }
+  else{
   return (
     <div className="homePageWrapper">
       <div className="formWrapper">
@@ -52,9 +65,11 @@ const Home = () => {
           <a onClick={createNewRoom} href='' className='createNewBtn'>new room</a></span>
         </div>
       </div>
-      <footer>Built with love by <a href="https://www.linkedin.com/in/prehansgupta2024/">Prehans</a></footer>
+      <footer>Created by <a href="https://www.linkedin.com/in/prehansgupta2024/"><u>Prehans Gupta ❤</u></a></footer>
     </div>
   )
 }
+}
+
 
 export default Home
